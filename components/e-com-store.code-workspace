@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"path": ".."
+	},
+	{
+		"path": "../../../Frontend  Mentor/ecommerce-product-page-main/ecommerce-page"
+	}
+],
+  "settings": {
+    "git.ignoreLimitWarning": true
+  }
+}
