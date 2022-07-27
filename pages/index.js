@@ -13,7 +13,7 @@ export default function Home({ products }) {
         <title>E-Commerce Store</title>
         <meta
           name="description"
-          content="E-Commerce store made with Next.js TailwindCSS and Hygraph"
+          content="E-Commerce store made with Next.js and Hygraph"
         />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,7 +24,7 @@ export default function Home({ products }) {
         />
       </Head>
 
-      <NavBar darkMode={darkMode} setDarkMode={setDarkMode} />
+      <NavBar />
       <Link href="/products">
         <h1>Products</h1>
       </Link>

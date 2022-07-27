@@ -1,0 +1,22 @@
+{
+  "folders": [
+    {
+      "path": ".."
+    },
+    {
+      "path": "../../../Frontend  Mentor/ecommerce-product-page-main/ecommerce-page"
+    },
+    {
+      "path": "../../../React/reducer-practice/reducer"
+    },
+    {
+      "path": "../../../React/todo-app/todo-frontend"
+    },
+    {
+      "path": "../../../React/weather-app"
+    }
+  ],
+  "settings": {
+    "git.ignoreLimitWarning": true
+  }
+}

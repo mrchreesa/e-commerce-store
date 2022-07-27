@@ -34,6 +34,8 @@ export default function NavBar({
   setDarkMode,
   cartItems,
   setCartItems,
+  cartState,
+  dispatch,
   addToCart,
   setAddToCart,
 }) {
@@ -111,7 +113,7 @@ export default function NavBar({
         aria-describedby={id}
         onClick={handleClick}
       >
-        <Badge badgeContent={addToCart} color="secondary">
+        <Badge badgeContent={cartState.quantity} color="secondary">
           <h1>🛒</h1>
         </Badge>
       </IconButton>
@@ -123,6 +125,8 @@ export default function NavBar({
                 handleClick={handleClick}
                 cartItems={addToCart}
                 setCartItems={setAddToCart}
+                cartState={cartState}
+                dispatch={dispatch}
               />
             </div>
           </Fade>

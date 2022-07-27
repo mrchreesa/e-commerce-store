@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import {
   Grid,
   Button,
@@ -11,11 +11,44 @@ import NavBar from "./NavBar";
 
 // import cart from "./images/icon-cart.svg";
 
+const initialCartState = {
+  quantity: 0,
+  description: "",
+  price: 0,
+  name: "",
+};
+
+const reducer = (state, action) => {
+  console.log(state);
+  switch (action.type) {
+    case "ADD_ITEM": {
+      const newState = action.payload;
+
+      // console.log("After ADD_ITEM: ", state);
+      return newState;
+    }
+  }
+};
+
 export default function ProductItem({ products }) {
+  const [cartState, dispatch] = useReducer(reducer, initialCartState);
+
   const [cartItems, setCartItems] = useState(0);
   const [addToCart, setAddToCart] = useState(0);
+
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const showSidebar = () => setSidebarToggle(!sidebarToggle);
+
+  const addCartItems = () => {
+    let newCartItems = {
+      quantity: cartItems,
+      description: cartItems !== 0 ? products[0].description : "",
+      price: products[0].price * cartItems,
+      name: products[0].name,
+    };
+
+    dispatch({ type: "ADD_ITEM", payload: newCartItems });
+  };
 
   const increment = () => {
     setCartItems(cartItems + 1);
@@ -23,10 +56,14 @@ export default function ProductItem({ products }) {
   const decrement = () => {
     setCartItems(cartItems != 0 ? cartItems - 1 : 0);
   };
-  console.log(products);
+  console.log(cartItems);
+  // console.log(products[0].description);
+
   return (
     <>
       <NavBar
+        cartState={cartState}
+        dispatch={dispatch}
         addToCart={addToCart}
         setAddToCart={setAddToCart}
         cartItems={cartItems}
@@ -59,7 +96,6 @@ export default function ProductItem({ products }) {
                 }}
               >
                 <h1>➖</h1>
-                {/* <img src={minus} alt="plus" /> */}
               </Button>
               <Typography
                 className="numbers"
@@ -83,8 +119,7 @@ export default function ProductItem({ products }) {
                 <h1>➕</h1>
               </Button>
             </ButtonGroup>{" "}
-            <Button className="btn-add" onClick={() => setAddToCart(cartItems)}>
-              {/* <img src={cart} alt="" /> */}
+            <Button className="btn-add" onClick={addCartItems}>
               Add to cart
             </Button>
           </div>

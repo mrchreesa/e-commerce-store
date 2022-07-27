@@ -5,7 +5,7 @@ import { Button, Typography, Paper, Popper, Fade } from "@mui/material";
 // import deleteIcon from "../images/icon-delete.svg";
 // import product1Thumbnail from "../images/image-product-1-thumbnail.jpg";
 
-export default function Cart({ cartItems, setCartItems }) {
+export default function Cart({ cartItems, setCartItems, cartState, dispatch }) {
   // const [cartItems, setCartItems] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -13,24 +13,32 @@ export default function Cart({ cartItems, setCartItems }) {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
-  const cartTotal = cartItems * 125;
+  const cartTotal = cartState.quantity * cartState.price;
 
   const resetCart = () => {
-    setCartItems(0);
+    let newCartItems = {
+      quantity: 0,
+      description: "",
+      price: 0,
+    };
+
+    dispatch({ type: "ADD_ITEM", payload: newCartItems });
   };
 
   return (
     <Paper className="cart-container" elevation={3}>
       <Typography className="cart-text"> Cart </Typography>
-      {cartItems == 0 ? (
+      {cartState.quantity == 0 ? (
         <p className="empty-cart">Shopping Cart Is Empty</p>
       ) : (
         <>
           <div className="cart-content">
             <h1>🛒</h1>
             <div className="cart-info">
-              <p>Fall Limited Edition Sneakers</p>
-              <p>$125.00 x {cartItems} = </p>
+              <p>{cartState.name}</p>
+              <p>
+                £{cartState.price} x {cartState.quantity} ={" "}
+              </p>
               <h5>${cartTotal}.00</h5>
             </div>
             <Button onClick={resetCart}>
