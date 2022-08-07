@@ -19,7 +19,7 @@ export default function ProductList({ products }) {
               <img src={product.images[0].url} alt="" />
               <br />
               <h1>{product.name}</h1>
-              <p>{product.price}</p>
+              <p>£{product.price}</p>
             </Grid>
           </Link>
         </>

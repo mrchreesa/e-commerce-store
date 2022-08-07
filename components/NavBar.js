@@ -7,27 +7,11 @@ import {
   Popper,
   Fade,
 } from "@mui/material";
-// import { makeStyles } from "@mui/styles";
-// import { createTheme } from "@mui/material/styles";
+
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 
 import Cart from "./Cart";
-
-// import logo from "../public/logo.png";
-// import cart from "../images/icon-cart.svg";
-
-// const theme = createTheme({
-//   palette: {
-//     // primary: {
-//     //   main: "#3b424d",
-//     // },
-//     secondary: {
-//       // This is green.A700 as hex.
-//       main: "#ff7d1a",
-//     },
-//   },
-// });
 
 export default function NavBar({
   darkMode,
@@ -71,8 +55,14 @@ export default function NavBar({
       </div>
       <div
         className={sidebarToggle ? "navbar-menu" : "navbar-menu nav-active"}
-        id={darkMode ? "navbar-link-light" : "navbar-link-dark"}
+        id={"navbar-link-dark"}
       >
+        <a
+          className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
+          href="#"
+        >
+          All Products
+        </a>
         <a
           className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
           href="#"
@@ -85,12 +75,7 @@ export default function NavBar({
         >
           Accesories
         </a>
-        <a
-          className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
-          href="#"
-        >
-          New in
-        </a>
+
         <a
           className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
           href="#"
@@ -113,7 +98,7 @@ export default function NavBar({
         aria-describedby={id}
         onClick={handleClick}
       >
-        <Badge badgeContent={cartState.quantity} color="secondary">
+        <Badge badgeContent={cartState?.quantity} color="secondary">
           <h1>🛒</h1>
         </Badge>
       </IconButton>

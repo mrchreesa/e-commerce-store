@@ -1,13 +1,35 @@
 import React, { useState } from "react";
 import ProductItem from "../../components/ProductItem";
 import { GraphQLClient, gql } from "graphql-request";
+import Head from "next/head";
 
 export default function Product(props) {
+  const [darkMode, setDarkMode] = useState("light");
+
   // const router = useRouter();
   // const { slug } = router.query;
   return (
     <div>
-      <ProductItem products={props.product} />
+      <Head>
+        <title>E-Commerce Store</title>
+        <meta
+          name="description"
+          content="E-Commerce store made with Next.js and HygraphCMS"
+        />
+        <link rel="shortcut icon" href="/logo.png" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Syncopate:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+      <ProductItem
+        setDarkMode={setDarkMode}
+        darkMode={darkMode}
+        products={props.product}
+      />
     </div>
   );
 }

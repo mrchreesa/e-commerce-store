@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ProductList from "../components/ProductList";
 import { GraphQLClient, gql } from "graphql-request";
 import NavBar from "../components/NavBar";
+import Head from "next/head";
 
 const hygraph = new GraphQLClient(
   "https://api-eu-west-2.hygraph.com/v2/cl5sfm1v8182o01t89dpv5v8i/master"
@@ -57,7 +58,22 @@ export default function products({ products }) {
     document.body.style.transition = "all 1s";
   }, [darkMode]);
   return (
-    <div>
+    <div className="products-container">
+      <Head>
+        <title>E-Commerce Store</title>
+        <meta
+          name="description"
+          content="E-Commerce store made with Next.js and Hygraph"
+        />
+        <link rel="shortcut icon" href="/logo.png" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Syncopate:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       <NavBar darkMode={darkMode} setDarkMode={setDarkMode} />
 
       <ProductList products={products} />

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import { Button, Typography, Paper, Popper, Fade } from "@mui/material";
+import PreviewPage from "./PreviewPage";
 // import { makeStyles } from "@mui/styles";
 
 // import deleteIcon from "../images/icon-delete.svg";
@@ -27,17 +29,16 @@ export default function Cart({ cartItems, setCartItems, cartState, dispatch }) {
 
   return (
     <Paper className="cart-container" elevation={3}>
-      <Typography className="cart-text"> Cart </Typography>
-      {cartState.quantity == 0 ? (
+      <Typography className="cart-text">🛒 Cart </Typography>
+      {cartState.quantity == 0 || cartState.quantity == undefined ? (
         <p className="empty-cart">Shopping Cart Is Empty</p>
       ) : (
         <>
           <div className="cart-content">
-            <h1>🛒</h1>
             <div className="cart-info">
-              <p>{cartState.name}</p>
+              <h4>{cartState?.name}</h4>
               <p>
-                £{cartState.price} x {cartState.quantity} ={" "}
+                £{cartState?.price} x {cartState?.quantity} ={" "}
               </p>
               <h5>${cartTotal}.00</h5>
             </div>
@@ -51,7 +52,12 @@ export default function Cart({ cartItems, setCartItems, cartState, dispatch }) {
         onClick={cartItems == 0 ? handleClick : ""}
         className="btn-checkout"
       >
-        {cartItems == 0 ? "CLOSE" : "Checkout"}
+        {cartState?.quantity == 0 ? (
+          "CLOSE"
+        ) : (
+          // <Link href="/checkout">Checkout</Link>
+          <PreviewPage />
+        )}
       </Button>
     </Paper>
   );

@@ -30,7 +30,7 @@ const reducer = (state, action) => {
   }
 };
 
-export default function ProductItem({ products }) {
+export default function ProductItem({ products, darkMode, setDarkMode }) {
   const [cartState, dispatch] = useReducer(reducer, initialCartState);
 
   const [cartItems, setCartItems] = useState(0);
@@ -62,6 +62,8 @@ export default function ProductItem({ products }) {
   return (
     <>
       <NavBar
+        setDarkMode={setDarkMode}
+        darkMode={darkMode}
         cartState={cartState}
         dispatch={dispatch}
         addToCart={addToCart}
