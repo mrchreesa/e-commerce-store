@@ -33,6 +33,9 @@ const QUERY = gql`
       images {
         url
       }
+      categories {
+        name
+      }
     }
   }
 `;

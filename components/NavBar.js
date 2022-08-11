@@ -7,7 +7,8 @@ import {
   Popper,
   Fade,
 } from "@mui/material";
-
+import Link from "next/link";
+import { useRouter } from "next/router";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 
@@ -25,7 +26,10 @@ export default function NavBar({
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [sidebarToggle, setSidebarToggle] = useState(false);
+  const [propertyTypeToggle, setPropertyTypeToggle] = useState("all");
+
   const showSidebar = () => setSidebarToggle(!sidebarToggle);
+  const router = useRouter();
 
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -47,48 +51,59 @@ export default function NavBar({
         <div className="line3"></div>
       </div>
       <div className="navbar-logo">
-        <img
-          className={darkMode ? "navbar-img-light" : "navbar-img-dark"}
-          src="/logo.png"
-          alt="navbar logo"
-        />
+        <Link href="/">
+          <img
+            className={darkMode ? "navbar-img-light" : "navbar-img-dark"}
+            src="/logo.png"
+            alt="navbar logo"
+          />
+        </Link>
       </div>
-      <div
-        className={sidebarToggle ? "navbar-menu" : "navbar-menu nav-active"}
-        id={"navbar-link-dark"}
-      >
-        <a
-          className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
-          href="#"
+      {router.pathname !== "/" ? (
+        <div
+          className={sidebarToggle ? "navbar-menu" : "navbar-menu nav-active"}
+          id={"navbar-link-dark"}
         >
-          All Products
-        </a>
-        <a
-          className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
-          href="#"
-        >
-          Clothes
-        </a>
-        <a
-          className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
-          href="#"
-        >
-          Accesories
-        </a>
+          <a
+            onClick={() => setPropertyTypeToggle("all")}
+            className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
+            href="#"
+          >
+            All Products
+          </a>
+          <a
+            onClick={() => setPropertyTypeToggle("clothes")}
+            className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
+            href="#"
+          >
+            Clothes
+          </a>
+          <a
+            onClick={() => setPropertyTypeToggle("accesories")}
+            className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
+            href="#"
+          >
+            Accesories
+          </a>
 
-        <a
-          className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
-          href="#"
-        >
-          About
-        </a>
-        <a
-          className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
-          href="#"
-        >
-          Contact
-        </a>
-      </div>
+          <a
+            onClick={() => setPropertyTypeToggle("about")}
+            className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
+            href="#"
+          >
+            About
+          </a>
+          <a
+            onClick={() => setPropertyTypeToggle("contact")}
+            className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
+            href="#"
+          >
+            Contact
+          </a>
+        </div>
+      ) : (
+        <div></div>
+      )}
       <div className="navbar-empty-div"></div>
       <Button style={{ marginRight: 10 }} onClick={toggleDarkMode}>
         {darkMode ? <DarkModeIcon /> : <LightModeIcon />}

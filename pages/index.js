@@ -49,7 +49,7 @@ export default function Home({ products }) {
         />
       </Head>
 
-      <NavBar setDarkMode={setDarkMode} darkMode={darkMode} />
+      {/* <NavBar setDarkMode={setDarkMode} darkMode={darkMode} /> */}
       <div className="main-container-landing">
         {" "}
         <Link href="/products">

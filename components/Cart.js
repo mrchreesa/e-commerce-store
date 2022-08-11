@@ -15,7 +15,7 @@ export default function Cart({ cartItems, setCartItems, cartState, dispatch }) {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
-  const cartTotal = cartState.quantity * cartState.price;
+  const cartTotal = cartState?.quantity * cartState?.price;
 
   const resetCart = () => {
     let newCartItems = {
@@ -30,7 +30,9 @@ export default function Cart({ cartItems, setCartItems, cartState, dispatch }) {
   return (
     <Paper className="cart-container" elevation={3}>
       <Typography className="cart-text">🛒 Cart </Typography>
-      {cartState.quantity == 0 || cartState.quantity == undefined ? (
+      {cartState?.quantity == 0 ||
+      cartState?.quantity == undefined ||
+      cartState == undefined ? (
         <p className="empty-cart">Shopping Cart Is Empty</p>
       ) : (
         <>

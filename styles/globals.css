@@ -53,10 +53,12 @@
 }
 
 .navbar-wrapper {
-  background-color: rgb(37, 17, 43);
+  /* background-color: rgb(37, 17, 43); */
+  background: linear-gradient(to left, #d4d3dd, rgb(37, 17, 43));
+
   display: flex;
   /* padding-bottom: 40px; */
-  border-bottom: 1px solid hsl(285, 40%, 45%);
+  /* border-bottom: 1px solid hsl(285, 100%, 86%); */
   justify-content: center;
   text-align: center;
   align-items: center;
@@ -66,9 +68,11 @@
   padding: 10px 0 10px 30px;
 }
 .navbar-logo img {
-  width: 20%;
+  cursor: pointer;
+
+  width: 15%;
   max-width: 335px;
-  min-width: 70px;
+  min-width: 50px;
 }
 .navbar-img-dark {
   filter: invert(100%);
@@ -84,9 +88,9 @@
 .navbar-menu a {
   margin-left: 30px;
   text-decoration: none;
-  color: hsl(219, 9%, 45%);
+  color: hsl(43, 100%, 86%);
   border-bottom: 4px solid transparent;
-  padding-bottom: 25px;
+  padding-bottom: 20px;
   transition: border-bottom 80ms ease-in-out 80ms;
   transition: color 80ms ease-in-out 80ms;
 }
@@ -122,15 +126,19 @@
 }
 .main-container-landing {
   width: 100%;
-  height: 90vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url(/logo2.png);
-  background-repeat: no-repeat;
+  background-blend-mode: luminosity;
+  background-image: url(/logo2.png),
+    linear-gradient(to right bottom, #847cd2, rgb(37, 17, 43));
+  /* background-repeat: no-repeat; */
   background-origin: border-box;
-  background-size: cover;
+  background-size: contain;
+
   background-position: center;
+  /* background: linear-gradient(to left, #443f71, rgb(37, 17, 43)); */
 }
 
 .btn-landing:hover {
@@ -140,7 +148,7 @@
   margin-top: 35%;
   padding-inline: 30px;
   border-radius: 25px;
-  background-color: rgb(243, 240, 255);
+  background-color: rgb(213, 213, 216);
   opacity: 0.9;
   height: 15%;
   color: rgb(84, 175, 161) !important;
@@ -169,7 +177,7 @@
 }
 .product-wrapper {
   align-items: center;
-  background-color: rgb(155, 127, 255);
+  background: linear-gradient(to left, #d4d3dd, #efefbb);
   margin-top: 0 !important;
 }
 .product-left-wrapper {
