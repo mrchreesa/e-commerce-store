@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import ProductList from "../components/ProductList";
 import { GraphQLClient, gql } from "graphql-request";
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 import Head from "next/head";
 
 const hygraph = new GraphQLClient(
@@ -80,6 +81,7 @@ export default function products({ products }) {
       <NavBar darkMode={darkMode} setDarkMode={setDarkMode} />
 
       <ProductList products={products} />
+      <Footer />
     </div>
   );
 }

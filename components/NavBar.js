@@ -64,13 +64,15 @@ export default function NavBar({
           className={sidebarToggle ? "navbar-menu" : "navbar-menu nav-active"}
           id={"navbar-link-dark"}
         >
-          <a
-            onClick={() => setPropertyTypeToggle("all")}
-            className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
-            href="#"
-          >
-            All Products
-          </a>
+          <Link href="/products">
+            <a
+              onClick={() => setPropertyTypeToggle("all")}
+              className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
+              href="#"
+            >
+              All Products
+            </a>
+          </Link>
           <a
             onClick={() => setPropertyTypeToggle("clothes")}
             className={darkMode ? "navbar-link-light" : "navbar-link-dark"}

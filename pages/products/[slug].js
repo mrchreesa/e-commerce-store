@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ProductItem from "../../components/ProductItem";
 import { GraphQLClient, gql } from "graphql-request";
 import Head from "next/head";
+import Footer from "../../components/Footer";
 
 export default function Product(props) {
   const [darkMode, setDarkMode] = useState("light");
@@ -30,6 +31,7 @@ export default function Product(props) {
         darkMode={darkMode}
         products={props.product}
       />
+      <Footer />
     </div>
   );
 }

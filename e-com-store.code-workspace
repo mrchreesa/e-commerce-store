@@ -4,19 +4,10 @@
       "path": ".."
     },
     {
-      "path": "../../../Frontend  Mentor/ecommerce-product-page-main/ecommerce-page"
+      "path": "../../airbnb-app/airbnb-frontend"
     },
     {
-      "path": "../../../React/reducer-practice/reducer"
-    },
-    {
-      "path": "../../../React/todo-app/todo-frontend"
-    },
-    {
-      "path": "../../../React/weather-app"
+      "path": "../../../React/pokemon-test"
     }
-  ],
-  "settings": {
-    "git.ignoreLimitWarning": true
-  }
+  ]
 }
