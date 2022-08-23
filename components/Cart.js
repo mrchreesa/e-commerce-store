@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button, Typography, Paper, Popper, Fade } from "@mui/material";
 import PreviewPage from "./PreviewPage";
-// import { makeStyles } from "@mui/styles";
+import { useCartItemsContext } from "../context/CartItemsContext";
 
-// import deleteIcon from "../images/icon-delete.svg";
-// import product1Thumbnail from "../images/image-product-1-thumbnail.jpg";
-
-export default function Cart({ cartItems, setCartItems, cartState, dispatch }) {
-  // const [cartItems, setCartItems] = useState(0);
+export default function Cart({ cartItems, setCartItems }) {
+  const { cartState, dispatch } = useCartItemsContext();
+  console.log(cartState);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -27,9 +25,14 @@ export default function Cart({ cartItems, setCartItems, cartState, dispatch }) {
     dispatch({ type: "ADD_ITEM", payload: newCartItems });
   };
 
+  useEffect(() => {}, []);
+
   return (
     <Paper className="cart-container" elevation={3}>
-      <Typography className="cart-text">🛒 Cart </Typography>
+      <Typography className="cart-text">
+        {" "}
+        Cart <div>🛒</div>{" "}
+      </Typography>
       {cartState?.quantity == 0 ||
       cartState?.quantity == undefined ||
       cartState == undefined ? (
@@ -38,6 +41,7 @@ export default function Cart({ cartItems, setCartItems, cartState, dispatch }) {
         <>
           <div className="cart-content">
             <div className="cart-info">
+              <h4>{cartState?.name}</h4>
               <h4>{cartState?.name}</h4>
               <p>
                 £{cartState?.price} x {cartState?.quantity} ={" "}

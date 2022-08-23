@@ -5,7 +5,9 @@ import { GraphQLClient, gql } from "graphql-request";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Head from "next/head";
+import { useCartItemsContext } from "../context/CartItemsContext";
 
+import NavBarProvider from "../context/NavBarContext";
 const hygraph = new GraphQLClient(
   "https://api-eu-west-2.hygraph.com/v2/cl5sfm1v8182o01t89dpv5v8i/master"
 );
@@ -52,6 +54,9 @@ export async function getStaticProps() {
 
 export default function products({ products }) {
   const [darkMode, setDarkMode] = useState("light");
+  const [propertyTypeToggle, setPropertyTypeToggle] = useState("all");
+  const { cartState, dispatch } = useCartItemsContext();
+
   // const theme = createTheme({
   //   palette: {
   //     mode: darkMode ? "light" : "dark",
@@ -78,9 +83,22 @@ export default function products({ products }) {
           rel="stylesheet"
         />
       </Head>
-      <NavBar darkMode={darkMode} setDarkMode={setDarkMode} />
+      {/* <CartItemsContext> */}
+      {/* <NavBarProvider> */}
+      <NavBar
+        cartState={cartState}
+        dispatch={dispatch}
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+        setPropertyTypeToggle={setPropertyTypeToggle}
+      />
+      {/* </NavBarProvider> */}
+      <ProductList
+        products={products}
+        propertyTypeToggle={propertyTypeToggle}
+      />
+      {/* </CartItemsContext> */}
 
-      <ProductList products={products} />
       <Footer />
     </div>
   );

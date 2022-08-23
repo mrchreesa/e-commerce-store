@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useContext } from "react";
 import {
   Grid,
   Button,
@@ -6,35 +6,20 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import Cart from "./Cart";
+import DropDownMenu from "./DropDownMenu";
 import NavBar from "./NavBar";
-
-// import cart from "./images/icon-cart.svg";
-
-const initialCartState = {
-  quantity: 0,
-  description: "",
-  price: 0,
-  name: "",
-};
-
-const reducer = (state, action) => {
-  console.log(state);
-  switch (action.type) {
-    case "ADD_ITEM": {
-      const newState = action.payload;
-
-      // console.log("After ADD_ITEM: ", state);
-      return newState;
-    }
-  }
-};
+import CartItemsContext from "../context/CartItemsContext";
+import { useCartItemsContext } from "../context/CartItemsContext";
 
 export default function ProductItem({ products, darkMode, setDarkMode }) {
-  const [cartState, dispatch] = useReducer(reducer, initialCartState);
+  // const [cartState, dispatch] = useReducer(reducer, initialCartState);
+  const { cartState, dispatch } = useCartItemsContext();
+  // const { cartState } = useStateContext();
+  // const { dispatch } = useDispatchContext();
 
   const [cartItems, setCartItems] = useState(0);
   const [addToCart, setAddToCart] = useState(0);
+  const [propertyTypeToggle, setPropertyTypeToggle] = useState("all");
 
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const showSidebar = () => setSidebarToggle(!sidebarToggle);
@@ -56,12 +41,13 @@ export default function ProductItem({ products, darkMode, setDarkMode }) {
   const decrement = () => {
     setCartItems(cartItems != 0 ? cartItems - 1 : 0);
   };
-  console.log(cartItems);
+  console.log(products);
   // console.log(products[0].description);
 
   return (
     <>
       <NavBar
+        setPropertyTypeToggle={setPropertyTypeToggle}
         setDarkMode={setDarkMode}
         darkMode={darkMode}
         cartState={cartState}
@@ -81,7 +67,10 @@ export default function ProductItem({ products, darkMode, setDarkMode }) {
         </div>
         <Grid container item md={6} className="product-right-wrapper">
           <h1>{products[0]?.name}</h1>
-          <h2>£{products[0]?.price}</h2>
+          <h2>£{products[0]?.price}</h2>{" "}
+          <div className="dropdown">
+            <DropDownMenu product={products} />
+          </div>
           <h5>{products[0]?.description}</h5>
           <div className="body-right-buttons">
             <ButtonGroup

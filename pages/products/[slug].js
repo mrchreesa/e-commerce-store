@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ProductItem from "../../components/ProductItem";
 import { GraphQLClient, gql } from "graphql-request";
 import Head from "next/head";
 import Footer from "../../components/Footer";
+import CartItemsContext from "../../context/CartItemsContext";
 
 export default function Product(props) {
   const [darkMode, setDarkMode] = useState("light");
@@ -26,11 +27,18 @@ export default function Product(props) {
           rel="stylesheet"
         />
       </Head>
-      <ProductItem
-        setDarkMode={setDarkMode}
-        darkMode={darkMode}
-        products={props.product}
-      />
+      {/* <DispatchContext>
+        <StateContext> */}
+      <CartItemsContext>
+        <ProductItem
+          setDarkMode={setDarkMode}
+          darkMode={darkMode}
+          products={props.product}
+        />
+      </CartItemsContext>
+
+      {/* </StateContext>
+      </DispatchContext> */}
       <Footer />
     </div>
   );

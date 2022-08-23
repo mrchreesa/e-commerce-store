@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Badge,
   Button,
@@ -11,14 +11,14 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
-
+import { useDarkModeContext } from "../context/NavBarContext";
+import { useFilterContext } from "../context/NavBarContext";
 import Cart from "./Cart";
 
 export default function NavBar({
   darkMode,
   setDarkMode,
-  cartItems,
-  setCartItems,
+  setPropertyTypeToggle,
   cartState,
   dispatch,
   addToCart,
@@ -26,7 +26,12 @@ export default function NavBar({
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [sidebarToggle, setSidebarToggle] = useState(false);
-  const [propertyTypeToggle, setPropertyTypeToggle] = useState("all");
+  // const { propertyTypeToggle, setPropertyTypeToggle } = useFilterContext();
+
+  // useEffect(() => {
+  //   document.body.style.backgroundColor = darkMode ? "white" : "hsl(0, 0%, 8%)";
+  //   document.body.style.transition = "all 1s";
+  // }, [darkMode]);
 
   const showSidebar = () => setSidebarToggle(!sidebarToggle);
   const router = useRouter();
@@ -40,6 +45,7 @@ export default function NavBar({
   };
   const open = Boolean(anchorEl);
   const id = open ? "transitions-popper" : undefined;
+
   return (
     <div className="navbar-wrapper">
       <div
@@ -87,21 +93,6 @@ export default function NavBar({
           >
             Accesories
           </a>
-
-          <a
-            onClick={() => setPropertyTypeToggle("about")}
-            className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
-            href="#"
-          >
-            About
-          </a>
-          <a
-            onClick={() => setPropertyTypeToggle("contact")}
-            className={darkMode ? "navbar-link-light" : "navbar-link-dark"}
-            href="#"
-          >
-            Contact
-          </a>
         </div>
       ) : (
         <div></div>
@@ -127,8 +118,6 @@ export default function NavBar({
                 handleClick={handleClick}
                 cartItems={addToCart}
                 setCartItems={setAddToCart}
-                cartState={cartState}
-                dispatch={dispatch}
               />
             </div>
           </Fade>
