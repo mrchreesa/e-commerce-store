@@ -52,7 +52,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function products({ products }) {
+export default function Products({ products }) {
   const [darkMode, setDarkMode] = useState("light");
   const [propertyTypeToggle, setPropertyTypeToggle] = useState("all");
   const { cartState, dispatch } = useCartItemsContext();
