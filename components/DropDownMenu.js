@@ -28,7 +28,9 @@ export default function BasicSelect({ product }) {
             inputProps={{ MenuProps: { disableScrollLock: true } }}
           >
             {variants.map((variant) => (
-              <Button value={variant.name}>{variant.name}</Button>
+              <Button key={value.name} value={variant.name}>
+                {variant.name}
+              </Button>
             ))}
           </Select>
         </FormControl>
