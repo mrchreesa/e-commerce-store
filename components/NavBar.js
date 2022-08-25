@@ -8,6 +8,7 @@ import {
   Fade,
 } from "@mui/material";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
