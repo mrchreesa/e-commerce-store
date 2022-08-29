@@ -18,20 +18,6 @@ export default function Home({ products }) {
   const [publishableKey, setPublishableKey] = useState("");
   const [darkMode, setDarkMode] = useState("light");
 
-  // useEffect = () => {
-  //   fetch("api/keys", {
-  //     method: "GET",
-  //     headers: { "Content-Type": "application/json" },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => setPublishableKey(data.publishableKey));
-  // };
-  // if (!publishableKey) {
-  //   return "Loading...";
-  // }
-
-  // const stripe = loadStripe(publishableKey);
-  // console.log(publishableKey);
   return (
     <div>
       <Head>
