@@ -83,7 +83,7 @@ export default function Products({ products }) {
           rel="stylesheet"
         />
       </Head>
-      {/* <CartItemsContext> */}
+
       {/* <NavBarProvider> */}
       <NavBar
         cartState={cartState}
@@ -92,12 +92,12 @@ export default function Products({ products }) {
         setDarkMode={setDarkMode}
         setPropertyTypeToggle={setPropertyTypeToggle}
       />
+
       {/* </NavBarProvider> */}
       <ProductList
         products={products}
         propertyTypeToggle={propertyTypeToggle}
       />
-      {/* </CartItemsContext> */}
 
       <Footer />
     </div>

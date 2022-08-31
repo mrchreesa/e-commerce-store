@@ -3,7 +3,6 @@ import ProductItem from "../../components/ProductItem";
 import { GraphQLClient, gql } from "graphql-request";
 import Head from "next/head";
 import Footer from "../../components/Footer";
-import CartItemsContext from "../../context/CartItemsContext";
 
 export default function Product(props) {
   const [darkMode, setDarkMode] = useState("light");
@@ -29,13 +28,12 @@ export default function Product(props) {
       </Head>
       {/* <DispatchContext>
         <StateContext> */}
-      <CartItemsContext>
-        <ProductItem
-          setDarkMode={setDarkMode}
-          darkMode={darkMode}
-          products={props.product}
-        />
-      </CartItemsContext>
+
+      <ProductItem
+        setDarkMode={setDarkMode}
+        darkMode={darkMode}
+        products={props.product}
+      />
 
       {/* </StateContext>
       </DispatchContext> */}

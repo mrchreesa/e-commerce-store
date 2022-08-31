@@ -8,14 +8,14 @@ import {
 } from "@mui/material";
 import DropDownMenu from "./DropDownMenu";
 import NavBar from "./NavBar";
-import CartItemsContext from "../context/CartItemsContext";
-import { useCartItemsContext } from "../context/CartItemsContext";
+
+import {
+  useCartItemsContext,
+  createCartItem,
+} from "../context/CartItemsContext";
 
 export default function ProductItem({ products, darkMode, setDarkMode }) {
-  // const [cartState, dispatch] = useReducer(reducer, initialCartState);
-  const { cartState, dispatch } = useCartItemsContext();
-  // const { cartState } = useStateContext();
-  // const { dispatch } = useDispatchContext();
+  const { cartState, dispatch, getCartItemQuantities } = useCartItemsContext();
 
   const [cartItems, setCartItems] = useState(0);
   const [addToCart, setAddToCart] = useState(0);
@@ -25,14 +25,21 @@ export default function ProductItem({ products, darkMode, setDarkMode }) {
   const showSidebar = () => setSidebarToggle(!sidebarToggle);
 
   const addCartItems = () => {
-    let newCartItems = {
-      quantity: cartItems,
-      description: cartItems !== 0 ? products[0].description : "",
-      price: products[0].price * cartItems,
-      name: products[0].name,
-    };
+    let newCartItem = createCartItem(
+      cartItems,
+      products[0].description,
+      products[0].price * cartItems,
+      products[0].name
+    );
 
-    dispatch({ type: "ADD_ITEM", payload: newCartItems });
+    // {
+    //   quantity: cartItems,
+    //   description: cartItems !== 0 ? products[0].description : "",
+    //   price: products[0].price * cartItems,
+    //   name: products[0].name,
+    // };
+
+    dispatch({ type: "ADD_ITEM", payload: newCartItem });
   };
 
   const increment = () => {
@@ -51,6 +58,7 @@ export default function ProductItem({ products, darkMode, setDarkMode }) {
         setDarkMode={setDarkMode}
         darkMode={darkMode}
         cartState={cartState}
+        getCartItemQuantities={getCartItemQuantities}
         dispatch={dispatch}
         addToCart={addToCart}
         setAddToCart={setAddToCart}

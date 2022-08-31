@@ -14,25 +14,31 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { useDarkModeContext } from "../context/NavBarContext";
 import { useFilterContext } from "../context/NavBarContext";
+import {
+  useCartItemsContext,
+  createCartItem,
+} from "../context/CartItemsContext";
 import Cart from "./Cart";
 
 export default function NavBar({
   darkMode,
   setDarkMode,
   setPropertyTypeToggle,
-  cartState,
-  dispatch,
+  // cartState,
+  // getCartItemQuantities,
+  // dispatch,
   addToCart,
   setAddToCart,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [sidebarToggle, setSidebarToggle] = useState(false);
-  // const { propertyTypeToggle, setPropertyTypeToggle } = useFilterContext();
+  const { cartState, dispatch, getCartItemQuantities } = useCartItemsContext();
 
-  // useEffect(() => {
-  //   document.body.style.backgroundColor = darkMode ? "white" : "hsl(0, 0%, 8%)";
-  //   document.body.style.transition = "all 1s";
-  // }, [darkMode]);
+  const [cartItemCount, setCartItemCount] = useState(0);
+
+  useEffect(() => {
+    setCartItemCount(getCartItemQuantities());
+  }, []);
 
   const showSidebar = () => setSidebarToggle(!sidebarToggle);
   const router = useRouter();
@@ -46,7 +52,7 @@ export default function NavBar({
   };
   const open = Boolean(anchorEl);
   const id = open ? "transitions-popper" : undefined;
-
+  console.log(cartState);
   return (
     <div className="navbar-wrapper">
       <div
@@ -107,7 +113,7 @@ export default function NavBar({
         aria-describedby={id}
         onClick={handleClick}
       >
-        <Badge badgeContent={cartState?.quantity} color="secondary">
+        <Badge badgeContent={cartItemCount} color="secondary">
           <h1>🛒</h1>
         </Badge>
       </IconButton>

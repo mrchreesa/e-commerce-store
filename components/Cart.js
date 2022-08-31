@@ -5,27 +5,25 @@ import PreviewPage from "./PreviewPage";
 import { useCartItemsContext } from "../context/CartItemsContext";
 
 export default function Cart({ cartItems, setCartItems }) {
-  const { cartState, dispatch } = useCartItemsContext();
-  console.log(cartState);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const { cartState: initialCartState, dispatch } = useCartItemsContext();
 
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [cartState, setCartState] = useState([]);
+
+  useEffect(() => {
+    setCartState(initialCartState);
+  }, []);
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
-  const cartTotal = cartState?.quantity * cartState?.price;
+  const cartTotal = /*cartState?.quantity * cartState?.price*/ 123;
 
   const resetCart = () => {
-    let newCartItems = {
-      quantity: 0,
-      description: "",
-      price: 0,
-    };
+    let newCartItems = [];
 
     dispatch({ type: "ADD_ITEM", payload: newCartItems });
   };
-
-  useEffect(() => {}, []);
 
   return (
     <Paper className="cart-container" elevation={3}>
@@ -33,25 +31,24 @@ export default function Cart({ cartItems, setCartItems }) {
         {" "}
         Cart <div>🛒</div>{" "}
       </Typography>
-      {cartState?.quantity == 0 ||
-      cartState?.quantity == undefined ||
-      cartState == undefined ? (
+      {cartState?.length == 0 ? (
         <p className="empty-cart">Shopping Cart Is Empty</p>
       ) : (
         <>
-          <div className="cart-content">
-            <div className="cart-info">
-              <h4>{cartState?.name}</h4>
-              <h4>{cartState?.name}</h4>
-              <p>
-                £{cartState?.price} x {cartState?.quantity} ={" "}
-              </p>
-              <h5>${cartTotal}.00</h5>
+          {cartState?.map((cartItem, cartIndex) => (
+            <div className="cart-content">
+              <div className="cart-info">
+                <h4>{cartItem?.name}</h4>
+                <p>
+                  £{cartItem?.price} x {cartItem?.quantity} ={" "}
+                </p>
+                <h5>${cartTotal}.00</h5>
+              </div>
+              <Button onClick={resetCart}>
+                <h1>✘</h1>
+              </Button>
             </div>
-            <Button onClick={resetCart}>
-              <h1>✘</h1>
-            </Button>
-          </div>
+          ))}
         </>
       )}{" "}
       <Button
