@@ -36,8 +36,8 @@ export default function Cart({ cartItems, setCartItems }) {
       ) : (
         <>
           {cartState?.map((cartItem, cartIndex) => (
-            <div className="cart-content">
-              <div className="cart-info">
+            <div key={cartItem.name} className="cart-content">
+              <div key={cartItem.price} className="cart-info">
                 <h4>{cartItem?.name}</h4>
                 <p>
                   £{cartItem?.price} x {cartItem?.quantity} ={" "}
