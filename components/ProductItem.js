@@ -32,13 +32,6 @@ export default function ProductItem({ products, darkMode, setDarkMode }) {
       products[0].name
     );
 
-    // {
-    //   quantity: cartItems,
-    //   description: cartItems !== 0 ? products[0].description : "",
-    //   price: products[0].price * cartItems,
-    //   name: products[0].name,
-    // };
-
     dispatch({ type: "ADD_ITEM", payload: newCartItem });
   };
 

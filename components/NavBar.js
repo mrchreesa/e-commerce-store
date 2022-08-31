@@ -38,7 +38,7 @@ export default function NavBar({
 
   useEffect(() => {
     setCartItemCount(getCartItemQuantities());
-  }, []);
+  }, [cartState]);
 
   const showSidebar = () => setSidebarToggle(!sidebarToggle);
   const router = useRouter();
