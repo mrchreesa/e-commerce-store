@@ -15,7 +15,8 @@ if (typeof window !== "undefined") {
   localStorageCartState = JSON.parse(window.localStorage.getItem("cartState"));
   console.log(window.localStorage.getItem("cartState"), localStorageCartState);
 }
-const initialCartState = [...localStorageCartState];
+const initialCartState =
+  localStorageCartState !== null ? [...localStorageCartState] : [];
 
 const reducer = (state, action) => {
   switch (action.type) {
