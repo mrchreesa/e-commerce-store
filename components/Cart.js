@@ -12,17 +12,19 @@ export default function Cart({ cartItems, setCartItems }) {
 
   useEffect(() => {
     setCartState(initialCartState);
-  }, []);
+  }, [initialCartState]);
+
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
   const cartTotal = /*cartState?.quantity * cartState?.price*/ 123;
 
-  const resetCart = () => {
-    let newCartItems = [];
+  const resetCart = (index) => {
+    let indexOfItem = index;
 
-    dispatch({ type: "ADD_ITEM", payload: newCartItems });
+    dispatch({ type: "DELETE_ITEM", payload: indexOfItem });
+    console.log(cartState);
   };
 
   return (
@@ -44,7 +46,7 @@ export default function Cart({ cartItems, setCartItems }) {
                 </p>
                 <h5>${cartTotal}.00</h5>
               </div>
-              <Button onClick={resetCart}>
+              <Button onClick={() => resetCart(cartIndex)}>
                 <h1>✘</h1>
               </Button>
             </div>

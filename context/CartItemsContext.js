@@ -10,10 +10,10 @@ export const createCartItem = (quantity, description, price, name) => ({
   price: price,
   name: name,
 });
+
 let localStorageCartState = [];
 if (typeof window !== "undefined") {
   localStorageCartState = JSON.parse(window.localStorage.getItem("cartState"));
-  console.log(window.localStorage.getItem("cartState"), localStorageCartState);
 }
 const initialCartState =
   localStorageCartState !== null ? [...localStorageCartState] : [];
@@ -31,6 +31,23 @@ const reducer = (state, action) => {
       }
       return updatedCartState;
     }
+    case "DELETE_ITEM": {
+      let updatedCartState;
+
+      if (typeof window !== "undefined") {
+        let storedProducts = JSON.parse(
+          window.localStorage.getItem("cartState")
+        );
+        let indexToRemove = action.payload;
+        if (indexToRemove > -1) {
+          // only splice array when item is found
+          storedProducts.splice(indexToRemove, 1); // 2nd parameter means remove one item only
+        }
+        localStorage.setItem("cartState", JSON.stringify(storedProducts));
+        updatedCartState = storedProducts;
+      }
+      return updatedCartState;
+    }
   }
 };
 
@@ -38,7 +55,7 @@ export default function CartItemsPorvider({ children }) {
   const [cartState, dispatch] = useReducer(reducer, initialCartState);
   const getCartItemQuantities = () => {
     let quantity = 0;
-    cartState.forEach((item) => {
+    cartState?.forEach((item) => {
       quantity += item.quantity;
     });
     return quantity;
