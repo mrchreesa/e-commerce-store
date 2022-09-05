@@ -24,9 +24,7 @@ export default function Cart({ cartItems, setCartItems }) {
     let indexOfItem = index;
 
     dispatch({ type: "DELETE_ITEM", payload: indexOfItem });
-    console.log(cartState);
   };
-
   return (
     <Paper className="cart-container" elevation={3}>
       <Typography className="cart-text">
@@ -61,7 +59,7 @@ export default function Cart({ cartItems, setCartItems }) {
           "CLOSE"
         ) : (
           // <Link href="/checkout">Checkout</Link>
-          <PreviewPage />
+          <PreviewPage  cartState={cartState}/>
         )}
       </Button>
     </Paper>
